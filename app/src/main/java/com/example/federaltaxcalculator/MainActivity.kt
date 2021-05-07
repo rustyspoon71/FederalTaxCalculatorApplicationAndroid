@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import kotlin.math.round
+
 
 /** Author Russell Roberts
  *  This simple application will take the user's input and
@@ -45,34 +47,41 @@ class MainActivity : AppCompatActivity() {
             }
             else if(income in 19751..80250)
                 {
-                    doubleValue = (doubleValue * .12) + 1975.0
+                    doubleValue = ((doubleValue - 19751.0)  * .12) + 1975.0
                 }
             else if(income in 80251..171050)
                 {
-                   doubleValue = (doubleValue  * .22) + 9235.0
+                   doubleValue = ((doubleValue - 80251.0) * .22  ) + 9235.0
                 }
             else if(income in 171051..326600)
                 {
-                    doubleValue = (doubleValue *.24)  + 29211.0
+                    doubleValue = ((doubleValue - 171051.0)  *.24) + 29211.0
                 }
             else if(income in 326601..414700)
                 {
-                    doubleValue = (doubleValue * .32) + 66543.0
+                    doubleValue = ((doubleValue - 326601.0) * .32) + 66543.0
                 }
             else if(income in 414701..622050)
                 {
-                    doubleValue = (doubleValue * .35) + 94735.0
+                    doubleValue = ((doubleValue - 414701.0) * .35) + 94735.0
                 }
             else
                 {
-                    doubleValue = (doubleValue * .37) + 167307.50
+                    doubleValue = ((doubleValue - 622050.0) * .37) + 167307.50
                 }
+
+
+
+            /** Set the number of decimal places */
+
+            var roundedResult = round(doubleValue * 100) / 100
+
+            var roundedString = roundedResult.toString()
 
             /** return the Value but cast it back to a string to be displayed and update the text */
 
-            var finalResult = doubleValue.toString()
             val text: TextView = findViewById(R.id.outputChannel) as TextView
-            text.text = finalResult
+            text.text = roundedString
         }
     }
 }
